@@ -17,4 +17,10 @@ public class StorageUtils {
         if(!storageDir.exists())
             storageDir.mkdirs();
     }
+
+    // returns the path for the writable storage dir of the application
+    public static String getAppStoragePath()
+    {
+        return "/data/data/com.plan.ahead/files/PlanAheadStorage/";
+    }
 }
