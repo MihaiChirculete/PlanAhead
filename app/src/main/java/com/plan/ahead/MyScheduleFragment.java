@@ -30,7 +30,7 @@ import java.util.List;
  * Created by mihai on 27.02.2018.
  */
 
-public class MySchedule extends Fragment {
+public class MyScheduleFragment extends Fragment {
 
     WeekView mWeekView;
     Toolbar tb;

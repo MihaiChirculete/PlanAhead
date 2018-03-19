@@ -5,21 +5,36 @@
         <item
             android:id="@+id/nav_my_schedule"
             android:icon="@mipmap/ic_calendar"
-            android:title="My Schedule" />
+            android:title="Programul meu" />
         <item
             android:id="@+id/nav_to_do_list"
-            android:icon="@mipmap/ic_done_all_black"
+            android:icon="@drawable/ic_to_do_list"
             android:iconTint = "@color/colorPrimary"
-            android:title="To do list" />
+            android:title="De facut" />
+        <item
+            android:id="@+id/nav_routines"
+            android:icon="@drawable/ic_routine"
+            android:iconTint = "@color/colorPrimary"
+            android:title="Rutine" />
+        <item
+            android:id="@+id/nav_reminders"
+            android:icon="@drawable/ic_reminders"
+            android:iconTint = "@color/colorPrimary"
+            android:title="Memento" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:iconTint = "@color/colorPrimary"
+            android:title="Despre" />
     </group>
 
-    <item android:title="Customization">
+    <item android:title="Personalizare">
         <menu>
             <item
                 android:id="@+id/nav_settings"
                 android:icon="@mipmap/ic_settings"
-                android:title="Settings" />
+                android:title="Setari" />
         </menu>
     </item>
 
-</menu>
+</menu> 
