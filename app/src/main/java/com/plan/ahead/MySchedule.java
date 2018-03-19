@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.plan.ahead.Storage.StorageUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,6 +35,7 @@ public class MySchedule extends Fragment {
     WeekView mWeekView;
     Toolbar tb;
     FloatingActionButton fabAddEvent;
+    List<WeekViewEvent> events;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,6 +47,8 @@ public class MySchedule extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        events = StorageUtils.loadEvents();
 
         tb = (Toolbar)getActivity().findViewById(R.id.toolbar);
         fabAddEvent = (FloatingActionButton)getActivity().findViewById(R.id.fabAddEvent);
@@ -73,8 +77,8 @@ public class MySchedule extends Fragment {
                 tb.setSubtitle("Year: " + newYear + " Month: " + newMonth);
 
                 // Populate the week view with some events.
-                List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
-
+                /*
+                events = new ArrayList<WeekViewEvent>();
                 Calendar startTime = Calendar.getInstance();
                 startTime.set(Calendar.HOUR_OF_DAY, 3);
                 startTime.set(Calendar.MINUTE, 0);
@@ -87,7 +91,11 @@ public class MySchedule extends Fragment {
                 event.setColor(getResources().getColor(R.color.eventColor01));
                 events.add(event);
 
+
                 return events;
+                */
+
+                return StorageUtils.loadEvents();
             }
         };
 
@@ -132,4 +140,10 @@ public class MySchedule extends Fragment {
         dialog.show();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        StorageUtils.saveEvents(events);
+    }
 }
