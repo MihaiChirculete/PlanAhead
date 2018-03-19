@@ -74,7 +74,7 @@ public class MyScheduleFragment extends Fragment {
         MonthLoader.MonthChangeListener mMonthChangeListener = new MonthLoader.MonthChangeListener() {
             @Override
             public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-                tb.setSubtitle("Year: " + newYear + " Month: " + newMonth);
+                tb.setSubtitle(getResources().getString(R.string.year) + newYear + getResources().getString(R.string.month) + newMonth);
 
                 // Populate the week view with some events.
                 /*
