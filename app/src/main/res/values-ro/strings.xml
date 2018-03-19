@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Plan Ahead</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_settings">Setari</string>
+
+    <string name="not_implemented">Neimplementat!</string>
+    <string name="nav_to_do_list">De facut</string>
+
+    <string name="year">An</string>
+    <string name="month">Luna</string>
+    <string name="nav_my_schedule">Programul meu</string>
+    <string name="nav_routines">Rutine</string>
+    <string name="nav_reminders">Memento</string>
+    <string name="nav_about">Despre</string>
+    <string name="nav_group_customize">Personalizare</string>
+
+</resources>
