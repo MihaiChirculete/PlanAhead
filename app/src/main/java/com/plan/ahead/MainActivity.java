@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.getMenu().getItem(0).setChecked(true);
         navigationView.setItemIconTintList(null);   // to display icons with their original color
 
-        updateFragment(MySchedule.class, R.id.main_fragment);
+        updateFragment(MyScheduleFragment.class, R.id.main_fragment);
     }
 
     @Override
@@ -84,8 +84,12 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_my_schedule) {
-            updateFragment(MySchedule.class, R.id.main_fragment);
-        } else if (id == R.id.nav_settings) {
+            updateFragment(MyScheduleFragment.class, R.id.main_fragment);
+        }
+        else if(id == R.id.nav_to_do_list) {
+            updateFragment(ToDoListFragment.class, R.id.main_fragment);
+        }
+        else {
             Toast.makeText(getApplicationContext(), "Not implemented yet.", Toast.LENGTH_SHORT).show();
         }
 

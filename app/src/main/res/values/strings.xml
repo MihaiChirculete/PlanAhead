@@ -5,4 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="not_implemented">Not implemented yet!</string>
+    <string name="to_do_list">De facut</string>
+
 </resources>
