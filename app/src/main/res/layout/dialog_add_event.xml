@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/eventNameBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:hint="Event name"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/btnLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eventNameBox"
+                android:layout_marginBottom="10dp"
+                android:text="LOCATIE" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnLocation"
+                android:text="From:" />
+
+            <Spinner
+                android:id="@+id/spinnerStartDate"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView2" />
+
+            <Spinner
+                android:id="@+id/spinnerStartHour"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView2"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/spinnerStartDate" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerStartDate"
+                android:layout_marginTop="10dp"
+                android:text="To:" />
+
+            <Spinner
+                android:id="@+id/spinnerStopDate"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView3" />
+
+            <Spinner
+                android:id="@+id/spinnerStopHour"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/spinnerStopDate"
+                android:layout_below="@+id/textView3"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/spinnerStopDate" />
+
+            <CheckBox
+                android:id="@+id/checkAllDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView3"
+                android:layout_below="@id/spinnerStopDate"
+                android:layout_marginTop="10dp"
+                android:text="All day" />
+
+            <Button
+                android:id="@+id/confirmBtn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/checkAllDay"
+                android:text="Add"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
