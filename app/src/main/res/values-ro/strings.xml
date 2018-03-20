@@ -9,12 +9,14 @@
     <string name="not_implemented">Neimplementat!</string>
     <string name="nav_to_do_list">De facut</string>
 
-    <string name="year">An</string>
-    <string name="month">Luna</string>
+    <string name="year">"An "</string>
+    <string name="month">"Luna "</string>
     <string name="nav_my_schedule">Programul meu</string>
     <string name="nav_routines">Rutine</string>
     <string name="nav_reminders">Memento</string>
     <string name="nav_about">Despre</string>
     <string name="nav_group_customize">Personalizare</string>
+    <string name="action_confirm">Accepta</string>
+    <string name="action_cancel">Anuleaza</string>
 
 </resources>

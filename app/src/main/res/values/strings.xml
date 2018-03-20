@@ -9,12 +9,14 @@
     <string name="not_implemented">Not implemented yet!</string>
     <string name="nav_to_do_list">To do</string>
 
-    <string name="year">Year</string>
-    <string name="month">Month</string>
+    <string name="year">"Year "</string>
+    <string name="month">"Month "</string>
     <string name="nav_my_schedule">My schedule</string>
     <string name="nav_routines">Routines</string>
     <string name="nav_reminders">Reminders</string>
     <string name="nav_about">About</string>
     <string name="nav_group_customize">Customization</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_cancel">Cancel</string>
 
 </resources>
