@@ -30,4 +30,26 @@ public class TimeStringUtils {
 
         return h + ":" + m;
     }
+
+    public static int timeCompare(String time1, String time2)
+    {
+        // -1: time 1 > time 2
+        // 0 : time 1 = time 2
+        // 1 : time 1 < time 2
+
+        if(getHour(time1) == getHour(time2)) {
+            if(getMinutes(time1) > getMinutes(time2))
+                return -1;
+            else if(getMinutes(time1) < getMinutes(time2))
+                return 1;
+        }
+
+        else if(getHour(time1) > getHour(time2))
+            return -1;
+
+        else if(getHour(time1) < getHour(time2))
+            return 1;
+
+        return 0;
+    }
 }

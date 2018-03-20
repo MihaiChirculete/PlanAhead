@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TimeUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.plan.ahead.Storage.StorageUtils;
+import com.plan.ahead.Utilities.TimeStringUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -126,6 +128,9 @@ public class MyScheduleFragment extends Fragment {
 
         // set the custom dialog components - text, image and button
         final Button startTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStartHour);
+        final Button stopTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStopHour);
+        final Button confirmBtn = (Button)dialog.findViewById(R.id.confirmBtn);
+
         startTimeSpinner.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -134,12 +139,27 @@ public class MyScheduleFragment extends Fragment {
             }
         });
 
-        final Button stopTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStopHour);
         stopTimeSpinner.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 pickTime(view);
+            }
+        });
+
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String t = startTimeSpinner.getText().toString();
+                String t2 = stopTimeSpinner.getText().toString();
+                if(!t.isEmpty() && !t2.isEmpty())
+                {
+                    if(TimeStringUtils.timeCompare(t, t2) != 1)
+                        Toast.makeText(getActivity().getApplicationContext(), "End time must be greater than start time", Toast.LENGTH_LONG).show();
+                    // else add the event
+                }
+                else
+                    Toast.makeText(getActivity().getApplicationContext(), "Interval not set!", Toast.LENGTH_LONG).show();
             }
         });
 
