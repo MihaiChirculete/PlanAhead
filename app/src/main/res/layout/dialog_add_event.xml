@@ -43,14 +43,15 @@
 
             <Spinner
                 android:id="@+id/spinnerStartDate"
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView2" />
 
-            <Spinner
+            <Button
                 android:id="@+id/spinnerStartHour"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.Spinner"
+                android:layout_width="150dp"
+                android:layout_height="20dp"
                 android:layout_below="@+id/textView2"
                 android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/spinnerStartDate" />
@@ -65,18 +66,20 @@
 
             <Spinner
                 android:id="@+id/spinnerStopDate"
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView3" />
 
-            <Spinner
+            <Button
                 android:id="@+id/spinnerStopHour"
+                style="@style/Widget.AppCompat.Spinner"
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_alignBottom="@+id/spinnerStopDate"
                 android:layout_below="@+id/textView3"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/spinnerStopDate" />
+                android:layout_toRightOf="@+id/spinnerStopDate"
+                />
 
             <CheckBox
                 android:id="@+id/checkAllDay"

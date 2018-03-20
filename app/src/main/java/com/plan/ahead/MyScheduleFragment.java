@@ -12,9 +12,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.MonthLoader;
@@ -121,21 +125,23 @@ public class MyScheduleFragment extends Fragment {
         dialog.setTitle("Add new event");
 
         // set the custom dialog components - text, image and button
-        /*
-        TextView text = (TextView) dialog.findViewById(R.id.text);
-        text.setText("Android custom dialog example!");
-        ImageView image = (ImageView) dialog.findViewById(R.id.image);
-        image.setImageResource(R.drawable.ic_launcher);
+        final Button startTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStartHour);
+        startTimeSpinner.setOnClickListener(new View.OnClickListener() {
 
-        Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
-        // if button is clicked, close the custom dialog
-        dialogButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                dialog.dismiss();
+            public void onClick(View view) {
+                pickTime(view);
             }
         });
-        */
+
+        final Button stopTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStopHour);
+        stopTimeSpinner.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                pickTime(view);
+            }
+        });
 
         dialog.show();
     }
@@ -145,5 +151,26 @@ public class MyScheduleFragment extends Fragment {
         super.onDestroy();
 
         StorageUtils.saveEvents(events);
+    }
+
+    private void pickTime(final View v)
+    {
+        // custom dialog
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_time_picker);
+        dialog.setTitle("Pick a time");
+
+        final TimePicker tp = dialog.findViewById(R.id.timePicker);
+
+        Button confirmBtn = dialog.findViewById(R.id.confirmBtn);
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((Button)v).setText(tp.getCurrentHour() + ":" + tp.getCurrentMinute());
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }
