@@ -18,5 +18,8 @@
     <string name="nav_group_customize">Personalizare</string>
     <string name="action_confirm">Accepta</string>
     <string name="action_cancel">Anuleaza</string>
+    <string name="nav_group_other">Altele</string>
+    <string name="dialog_title_about">Despre aplicatie</string>
+    <string name="dialog_message_about">Aceasta este o aplicatie ce va ajuta sa va organizati programul.</string>
 
 </resources>

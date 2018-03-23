@@ -18,5 +18,8 @@
     <string name="nav_group_customize">Customization</string>
     <string name="action_confirm">Confirm</string>
     <string name="action_cancel">Cancel</string>
+    <string name="nav_group_other">Other</string>
+    <string name="dialog_title_about">About</string>
+    <string name="dialog_message_about">This is an app that helps you better organize your schedule.</string>
 
 </resources>

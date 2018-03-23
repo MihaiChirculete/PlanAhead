@@ -1,9 +1,11 @@
 package com.plan.ahead;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +14,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.plan.ahead.Storage.StorageUtils;
@@ -88,6 +91,23 @@ public class MainActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_to_do_list) {
             updateFragment(ToDoListFragment.class, R.id.main_fragment);
+        }
+        else if(id==R.id.nav_about) {
+            final AlertDialog ad;
+            AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
+            adb.setTitle(getResources().getString(R.string.dialog_title_about));
+            adb.setMessage(getResources().getString(R.string.dialog_message_about));
+            adb.setIcon(R.drawable.ic_about);
+            adb.setCancelable(true);
+            adb.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+
+            ad = adb.create();
+            ad.show();
         }
         else {
             Toast.makeText(getApplicationContext(), "Not implemented yet.", Toast.LENGTH_SHORT).show();
