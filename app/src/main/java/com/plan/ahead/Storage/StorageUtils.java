@@ -87,7 +87,7 @@ public class StorageUtils {
         File f = new File(getAppStoragePath() + "Events.json");
 
         if(!f.exists())
-            return null;
+            return new ArrayList<WeekViewEvent>();
 
         List<WeekViewEvent> events = new ArrayList<WeekViewEvent>();
         JSONArray ja;
