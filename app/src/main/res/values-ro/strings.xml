@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Plan Ahead</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Deschide sertar navigare</string>
+    <string name="navigation_drawer_close">Inchide sertar navigare</string>
 
     <string name="nav_settings">Setari</string>
 
@@ -21,5 +21,12 @@
     <string name="nav_group_other">Altele</string>
     <string name="dialog_title_about">Despre aplicatie</string>
     <string name="dialog_message_about">Aceasta este o aplicatie ce va ajuta sa va organizati programul.</string>
+    <string name="monday">Luni</string>
+    <string name="tuesday">Marti</string>
+    <string name="wednesday">Miercuri</string>
+    <string name="thursday">Joi</string>
+    <string name="friday">Vineri</string>
+    <string name="saturday">Sambata</string>
+    <string name="sunday">Duminica</string>
 
 </resources>

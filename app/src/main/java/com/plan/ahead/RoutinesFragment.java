@@ -19,8 +19,6 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        tb = (Toolbar)getActivity().findViewById(R.id.toolbar);
-        tb.setSubtitle("Rutine");
 
         return inflater.inflate(R.layout.fragment_routines, container, false);
 
@@ -28,6 +26,9 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        tb = (Toolbar)getActivity().findViewById(R.id.toolbar);
+        tb.setSubtitle("Rutine");
+
         super.onActivityCreated(savedInstanceState);
     }
 }
