@@ -21,7 +21,7 @@ public class ReminderFragment extends Fragment {
         tb = (Toolbar)getActivity().findViewById(R.id.toolbar);
         tb.setSubtitle("Memento");
 
-        return inflater.inflate(R.layout.fragment_routines, container, false);
+        return inflater.inflate(R.layout.fragment_reminder, container, false);
 
     }
 

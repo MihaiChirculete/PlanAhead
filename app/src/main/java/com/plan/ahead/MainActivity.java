@@ -94,6 +94,9 @@ public class MainActivity extends AppCompatActivity
         else if(id == R.id.nav_reminders) {
             updateFragment(ReminderFragment.class, R.id.main_fragment);
         }
+        else if(id == R.id.nav_routines) {
+            updateFragment(RoutinesFragment.class, R.id.main_fragment);
+        }
         else if(id==R.id.nav_about) {
             final AlertDialog ad;
             AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this);
