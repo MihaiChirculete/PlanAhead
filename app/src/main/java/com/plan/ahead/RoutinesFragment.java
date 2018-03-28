@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * Created by Madalina on 3/28/2018.
  */
 
-public class RoutinesFragment extends Fragment {
+public class RoutinesFragment extends android.support.v4.app.Fragment {
 
     Toolbar tb;
 
