@@ -1,6 +1,7 @@
 package com.plan.ahead;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -96,6 +97,10 @@ public class MainActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_routines) {
             updateFragment(RoutinesFragment.class, R.id.main_fragment);
+        }
+        else if(id == R.id.nav_settings) {
+            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
         }
         else if(id==R.id.nav_about) {
             final AlertDialog ad;
