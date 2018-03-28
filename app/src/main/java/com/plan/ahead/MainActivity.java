@@ -14,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.plan.ahead.Storage.StorageUtils;
@@ -91,6 +90,9 @@ public class MainActivity extends AppCompatActivity
         }
         else if(id == R.id.nav_to_do_list) {
             updateFragment(ToDoListFragment.class, R.id.main_fragment);
+        }
+        else if(id == R.id.nav_reminders) {
+            updateFragment(ReminderFragment.class, R.id.main_fragment);
         }
         else if(id==R.id.nav_about) {
             final AlertDialog ad;
