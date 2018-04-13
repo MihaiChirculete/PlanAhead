@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -28,6 +29,7 @@ import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
 import com.plan.ahead.Storage.StorageUtils;
+import com.plan.ahead.Utilities.DateStringUtils;
 import com.plan.ahead.Utilities.TimeStringUtils;
 
 import java.util.ArrayList;
@@ -111,11 +113,15 @@ public class MyScheduleFragment extends Fragment {
         dialog.setTitle("Add new event");
 
         // set the custom dialog components - text, image and button
+        final EditText eventNameBox = (EditText) dialog.findViewById(R.id.eventNameBox);
+        final Button location = (Button) dialog.findViewById(R.id.btnLocation);
         final Button startTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStartHour);
         final Button stopTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStopHour);
         final Button startDateSpinner = (Button) dialog.findViewById(R.id.spinnerStartDate);
         final Button stopDateSpinner = (Button) dialog.findViewById(R.id.spinnerStopDate);
         final Button confirmBtn = (Button)dialog.findViewById(R.id.confirmBtn);
+
+        location.setVisibility(View.GONE);
 
         startTimeSpinner.setOnClickListener(new View.OnClickListener() {
 
@@ -153,13 +159,30 @@ public class MyScheduleFragment extends Fragment {
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean valid = true;
+
                 String t = startTimeSpinner.getText().toString();
                 String t2 = stopTimeSpinner.getText().toString();
+                String d = startDateSpinner.getText().toString();
+                String d2 = stopDateSpinner.getText().toString();
+
                 if(!t.isEmpty() && !t2.isEmpty())
                 {
-                    if(TimeStringUtils.timeCompare(t, t2) != 1)
+                    if(TimeStringUtils.timeCompare(t, t2) != 1) {
+                        valid = false;
                         Toast.makeText(getActivity().getApplicationContext(), "End time must be greater than start time", Toast.LENGTH_LONG).show();
-                    // else add the event
+                    }
+                    if(DateStringUtils.dateCompare(d, d2) != 1) {
+                        valid = false;
+                        Toast.makeText(getActivity().getApplicationContext(), "End date must be greater than start date", Toast.LENGTH_LONG).show();
+                    }
+                    if(eventNameBox.getText().toString().isEmpty()) {
+                        valid = false;
+                        Toast.makeText(getActivity().getApplicationContext(), "You must enter an event name", Toast.LENGTH_LONG).show();
+                    }
+
+                    //if(valid)
+                      // add the event to the table view
                 }
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Interval not set!", Toast.LENGTH_LONG).show();
