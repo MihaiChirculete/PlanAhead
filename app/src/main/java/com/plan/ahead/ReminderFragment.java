@@ -55,7 +55,7 @@ public class ReminderFragment extends Fragment {
 
         // set the custom dialog components - text, image and button
         final Button startTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStartHour);
-        final Button stopTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStopHour);
+
         final Button confirmBtn = (Button)dialog.findViewById(R.id.confirmBtn);
 
         startTimeSpinner.setOnClickListener(new View.OnClickListener() {
@@ -66,27 +66,10 @@ public class ReminderFragment extends Fragment {
             }
         });
 
-        stopTimeSpinner.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                pickTime(view);
-            }
-        });
-
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String t = startTimeSpinner.getText().toString();
-                String t2 = stopTimeSpinner.getText().toString();
-                if(!t.isEmpty() && !t2.isEmpty())
-                {
-                    if(TimeStringUtils.timeCompare(t, t2) != 1)
-                        Toast.makeText(getActivity().getApplicationContext(), "End time must be greater than start time", Toast.LENGTH_LONG).show();
-                    // else add the event
-                }
-                else
-                    Toast.makeText(getActivity().getApplicationContext(), "Interval not set!", Toast.LENGTH_LONG).show();
+                //add
             }
         });
 
