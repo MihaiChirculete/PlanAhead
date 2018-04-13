@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <ScrollView
@@ -12,7 +13,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/eventNameBox"
@@ -26,72 +27,77 @@
                 android:hint="Event name"
                 android:inputType="textPersonName" />
 
-            <Button
-                android:id="@+id/btnLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/eventNameBox"
-                android:layout_marginBottom="10dp"
-                android:text="LOCATIE" />
-
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/btnLocation"
-                android:text="From:" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/eventNameBox"
+                android:text="Remind at:" />
 
             <Spinner
                 android:id="@+id/spinnerStartDate"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView2" />
+                android:layout_alignLeft="@+id/dateCheckBox"
+                android:layout_alignStart="@+id/spinnerStartHour"
+                android:layout_alignTop="@+id/dateCheckBox" />
 
             <Button
                 android:id="@+id/spinnerStartHour"
                 style="@style/Widget.AppCompat.Spinner"
                 android:layout_width="150dp"
                 android:layout_height="20dp"
-                android:layout_below="@+id/textView2"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/spinnerStartDate" />
-
-            <TextView
-                android:id="@+id/textView3"
+                android:layout_below="@+id/eventNameBox"
+                android:layout_centerHorizontal="true" />
+            <CheckBox
+                android:id="@+id/dateCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinnerStartDate"
-                android:layout_marginTop="10dp"
-                android:text="To:" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/spinnerStartHour"
+                android:layout_marginTop="20dp"
+                android:text="Date" />
 
-            <Spinner
-                android:id="@+id/spinnerStopDate"
-                android:layout_width="150dp"
+            <CheckBox
+                android:id="@+id/checkEveryDay"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView3" />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/dateCheckBox"
+                android:layout_marginTop="14dp"
+                android:text="Every day" />
 
-            <Button
-                android:id="@+id/spinnerStopHour"
-                style="@style/Widget.AppCompat.Spinner"
-                android:layout_width="150dp"
-                android:layout_height="20dp"
-                android:layout_alignTop="@+id/spinnerStopDate"
-                android:layout_below="@+id/textView3"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/spinnerStopDate"
-                android:layout_marginBottom="25dp"/>
+            <CheckBox
+                android:id="@+id/checkBoxEveryWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/checkEveryDay"
+                android:layout_marginTop="13dp"
+                android:text="Every week" />
 
             <LinearLayout
                 android:id="@+id/daysCheckboxes"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/spinnerStopHour"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/checkBoxEveryWeek"
+                android:layout_marginLeft="50dp"
                 android:orientation="vertical">
 
                 <CheckBox
                     android:id="@+id/mondayCheck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/daysCheckboxes"
                     android:text="@string/monday" />
 
                 <CheckBox
