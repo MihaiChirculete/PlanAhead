@@ -1,5 +1,6 @@
 package com.plan.ahead;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -17,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -111,6 +113,8 @@ public class MyScheduleFragment extends Fragment {
         // set the custom dialog components - text, image and button
         final Button startTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStartHour);
         final Button stopTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStopHour);
+        final Button startDateSpinner = (Button) dialog.findViewById(R.id.spinnerStartDate);
+        final Button stopDateSpinner = (Button) dialog.findViewById(R.id.spinnerStopDate);
         final Button confirmBtn = (Button)dialog.findViewById(R.id.confirmBtn);
 
         startTimeSpinner.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +132,23 @@ public class MyScheduleFragment extends Fragment {
                 pickTime(view);
             }
         });
+
+        startDateSpinner.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                pickDate(view);
+            }
+        });
+
+        stopDateSpinner.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                pickDate(view);
+            }
+        });
+
 
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,6 +190,26 @@ public class MyScheduleFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ((Button)v).setText(tp.getCurrentHour() + ":" + tp.getCurrentMinute());
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void pickDate(final View v)
+    {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_date_picker);
+        dialog.setTitle("Pick a date");
+
+        final DatePicker dp = dialog.findViewById(R.id.datePicker);
+
+        Button confirmBtn = dialog.findViewById(R.id.confirmBtn);
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((Button)v).setText(dp.getDayOfMonth() + "/" + dp.getMonth() + "/" + dp.getYear());
                 dialog.dismiss();
             }
         });

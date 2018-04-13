@@ -41,10 +41,11 @@
                 android:layout_below="@+id/btnLocation"
                 android:text="From:" />
 
-            <Spinner
+            <Button
                 android:id="@+id/spinnerStartDate"
+                style="@style/Widget.AppCompat.Spinner"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_below="@+id/textView2" />
 
             <Button
@@ -64,10 +65,11 @@
                 android:layout_marginTop="10dp"
                 android:text="To:" />
 
-            <Spinner
+            <Button
                 android:id="@+id/spinnerStopDate"
+                style="@style/Widget.AppCompat.Spinner"
                 android:layout_width="150dp"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_below="@+id/textView3" />
 
             <Button
