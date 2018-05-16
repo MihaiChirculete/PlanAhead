@@ -25,7 +25,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="10dp"
                 android:ems="10"
-                android:hint="Event name"
+                android:hint="@string/event_name"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -37,8 +37,9 @@
                 android:layout_below="@+id/eventNameBox"
                 android:text="Remind at:" />
 
-            <Spinner
+            <Button
                 android:id="@+id/spinnerStartDate"
+                style="@style/Widget.AppCompat.Spinner"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/dateCheckBox"
@@ -49,11 +50,11 @@
             <Button
                 android:id="@+id/spinnerStartHour"
                 style="@style/Widget.AppCompat.Spinner"
-                android:layout_width="60dp"
+                android:layout_width="100dp"
                 android:layout_height="20dp"
                 android:layout_below="@+id/eventNameBox"
-                android:layout_toEndOf="@+id/everyWeekCheckBox"
-                android:layout_toRightOf="@+id/everyWeekCheckBox" />
+                android:layout_toEndOf="@+id/weeklyCheckBox"
+                android:layout_toRightOf="@+id/weeklyCheckBox" />
             <CheckBox
                 android:id="@+id/dateCheckBox"
                 android:layout_width="wrap_content"
@@ -65,7 +66,7 @@
                 android:text="Date" />
 
             <CheckBox
-                android:id="@+id/everyDayCheckBox"
+                android:id="@+id/dailyCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -75,12 +76,12 @@
                 android:text="Every day" />
 
             <CheckBox
-                android:id="@+id/everyWeekCheckBox"
+                android:id="@+id/weeklyCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/everyDayCheckBox"
+                android:layout_below="@+id/dailyCheckBox"
                 android:layout_marginTop="13dp"
                 android:text="Every week" />
 
@@ -90,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/everyWeekCheckBox"
+                android:layout_below="@+id/weeklyCheckBox"
                 android:layout_marginLeft="50dp"
                 android:visibility="gone"
                 android:orientation="vertical">

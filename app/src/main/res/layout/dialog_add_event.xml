@@ -23,7 +23,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="10dp"
                 android:ems="10"
-                android:hint="Event name"
+                android:hint="@string/event_name"
                 android:inputType="textPersonName" />
 
             <Button
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/eventNameBox"
                 android:layout_marginBottom="10dp"
-                android:text="LOCATIE" />
+                android:hint="@string/location" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -51,10 +51,10 @@
             <Button
                 android:id="@+id/spinnerStartHour"
                 style="@style/Widget.AppCompat.Spinner"
-                android:layout_width="150dp"
+                android:layout_width="100dp"
                 android:layout_height="20dp"
                 android:layout_below="@+id/textView2"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/spinnerStartDate" />
 
             <TextView
@@ -75,11 +75,11 @@
             <Button
                 android:id="@+id/spinnerStopHour"
                 style="@style/Widget.AppCompat.Spinner"
-                android:layout_width="150dp"
+                android:layout_width="100dp"
                 android:layout_height="20dp"
                 android:layout_alignTop="@+id/spinnerStopDate"
                 android:layout_below="@+id/textView3"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@+id/spinnerStopDate" />
 
             <CheckBox

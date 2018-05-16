@@ -28,5 +28,9 @@
     <string name="friday">Vineri</string>
     <string name="saturday">Sambata</string>
     <string name="sunday">Duminica</string>
+    <string name="event_name">Nume activitate</string>
+    <string name="location">Locatie</string>
+    <string name="start_hour">Ora de inceput</string>
+    <string name="end_hour">Ora de sfarsit</string>
 
 </resources>

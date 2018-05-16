@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/eventNameBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:hint= "@string/event_name"
+                android:inputType="textPersonName"/>
+
+            <Button
+                android:id="@+id/btnLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/eventNameBox"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/location"/>
+
+            <CheckBox
+                android:id="@+id/dailyCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btnLocation"
+                android:layout_marginTop="20dp"
+                android:text="Daily" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/dailyCheckBox"
+                android:id="@+id/dailyLayout"
+                android:layout_marginLeft="40dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textDailyStartHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/start_hour"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                <Button
+                    android:id="@+id/spinnerDailyStartHour"
+                    style="@style/Widget.AppCompat.Spinner"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@id/textDailyStartHour" />
+
+                <TextView
+                    android:id="@+id/textDailyEndHour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/textDailyStartHour"
+                    android:text="@string/end_hour"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                <Button
+                    android:id="@+id/spinnerDailyEndHour"
+                    style="@style/Widget.AppCompat.Spinner"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="37dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/spinnerDailyStartHour"
+                    android:layout_toRightOf="@id/textDailyEndHour" />
+            </RelativeLayout>
+
+            <CheckBox
+                android:id="@+id/weeklyCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/dailyLayout"
+                android:layout_marginTop="20dp"
+                android:text="Weekly" />
+
+            <LinearLayout
+                android:id="@+id/weeklyLayout"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/weeklyCheckBox"
+                android:layout_marginLeft="20dp"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <CheckBox
+                    android:id="@+id/mondayCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/daysCheckboxes"
+                    android:text="@string/monday" />
+
+                <RelativeLayout
+                    android:id="@+id/mondayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/mondayCheckBox"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textMondayStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerMondayStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/textMondayStartHour" />
+
+                    <TextView
+                        android:id="@+id/textMondayEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textMondayStartHour"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerMondayEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/spinnerMondayStartHour"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@id/textMondayEndHour" />
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/tuesdayCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tuesday"/>
+
+                <RelativeLayout
+                    android:id="@+id/tuesdayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/mondayCheckBox"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textTuesdayStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerTuesdayStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/textTuesdayStartHour" />
+
+                    <TextView
+                        android:id="@+id/textTuesdayEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textTuesdayStartHour"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerTuesdayEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/spinnerTuesdayStartHour"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@id/textTuesdayEndHour" />
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/wednesdayCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wednesday" />
+
+                <RelativeLayout
+                    android:id="@+id/wednesdayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/mondayCheckBox"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textWednesdayStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerWednesdayStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/textWednesdayStartHour" />
+
+                    <TextView
+                        android:id="@+id/textWednesdayEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textWednesdayStartHour"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerWednesdayEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/spinnerWednesdayStartHour"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@id/textWednesdayEndHour" />
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/thursdayCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/thursday" />
+
+                <RelativeLayout
+                    android:id="@+id/thursdayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/mondayCheckBox"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textThursdayStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerThursdayStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/textThursdayStartHour" />
+
+                    <TextView
+                        android:id="@+id/textThursdayEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textThursdayStartHour"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerThursdayEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/spinnerThursdayStartHour"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@id/textThursdayEndHour" />
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/fridayCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/friday" />
+
+                <RelativeLayout
+                    android:id="@+id/fridayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/mondayCheckBox"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textFridayStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerFridayStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/textFridayStartHour" />
+
+                    <TextView
+                        android:id="@+id/textFridayEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textFridayStartHour"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerFridayEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/spinnerFridayStartHour"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@id/textFridayEndHour" />
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/saturdayCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saturday" />
+
+                <RelativeLayout
+                    android:id="@+id/saturdayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/mondayCheckBox"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textSaturdayStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerSaturdayStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/textSaturdayStartHour" />
+
+                    <TextView
+                        android:id="@+id/textSaturdayEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textSaturdayStartHour"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerSaturdayEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/spinnerSaturdayStartHour"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@id/textSaturdayEndHour" />
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/sundayCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sunday" />
+
+                <RelativeLayout
+                    android:id="@+id/sundayLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/mondayCheckBox"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textSundayStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerSundayStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@id/textSundayStartHour" />
+
+                    <TextView
+                        android:id="@+id/textSundayEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textSundayStartHour"
+                        android:layout_marginTop="20dp"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerSundayEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_below="@+id/spinnerSundayStartHour"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@id/textSundayEndHour" />
+                </RelativeLayout>
+                <CheckBox
+                    android:id="@+id/sameTimetableCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Same timetable" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/dailyCheckBox"
+                    android:id="@+id/sameTimetableLayout"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/textSameTimetableStartHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/start_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+                    <Button
+                        android:id="@+id/spinnerSameTimetableStartHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_toRightOf="@id/textSameTimetableStartHour" />
+
+                    <TextView
+                        android:id="@+id/textSameTimetableEndHour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@id/textSameTimetableStartHour"
+                        android:text="@string/end_hour"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+                    <Button
+                        android:id="@+id/spinnerSameTimetableEndHour"
+                        style="@style/Widget.AppCompat.Spinner"
+                        android:layout_width="100dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="37dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/spinnerSameTimetableStartHour"
+                        android:layout_toRightOf="@id/textSameTimetableEndHour" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/confirmBtn"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/weeklyLayout"
+                android:layout_marginTop="13dp"
+                android:text="Add"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </ScrollView>
+</LinearLayout>

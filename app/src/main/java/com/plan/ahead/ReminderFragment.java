@@ -11,12 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.plan.ahead.Utilities.TimeStringUtils;
+import com.plan.ahead.Classes.CustomDialog;
 
 /**
  * Created by Andrey on 28/03/2018.
@@ -46,127 +45,96 @@ public class ReminderFragment extends Fragment {
             }
         });
 
+
         super.onActivityCreated(savedInstanceState);
     }
 
-    void onDateClick(View v, Dialog dialog) {
+    void onButtonClick(View v, CustomDialog dialog, CheckBox[] buttons, int clickedButton) {
 
-        CheckBox date = (CheckBox) dialog.findViewById(R.id.dateCheckBox);
-        Spinner datePicker = (Spinner) dialog.findViewById(R.id.spinnerStartDate);
-        CheckBox everyDay = (CheckBox) dialog.findViewById(R.id.everyDayCheckBox);
-        CheckBox everyWeek = (CheckBox) dialog.findViewById(R.id.everyWeekCheckBox);
+        Button datePicker = (Button) dialog.findViewById(R.id.spinnerStartDate);
         LinearLayout daysLayout = (LinearLayout) dialog.findViewById(R.id.daysCheckboxes);
 
-        if(date.isChecked())
+        if(clickedButton == 0)
         {
-            everyDay.setChecked(false);
-            everyWeek.setChecked(false);
+            buttons[1].setChecked(false);
+            buttons[2].setChecked(false);
             daysLayout.setVisibility(View.GONE);
             datePicker.setVisibility(View.VISIBLE);
         }
-        else
-            datePicker.setVisibility(View.VISIBLE);
-
-    }
-    void onEveryDayClick(View v, Dialog dialog) {
-
-        CheckBox date = (CheckBox) dialog.findViewById(R.id.dateCheckBox);
-        Spinner datePicker = (Spinner) dialog.findViewById(R.id.spinnerStartDate);
-        CheckBox everyDay = (CheckBox) dialog.findViewById(R.id.everyDayCheckBox);
-        CheckBox everyWeek = (CheckBox) dialog.findViewById(R.id.everyWeekCheckBox);
-        LinearLayout daysLayout = (LinearLayout) dialog.findViewById(R.id.daysCheckboxes);
-
-        if(everyDay.isChecked())
+        else if(clickedButton == 1)
         {
-            date.setChecked(false);
-            everyWeek.setChecked(false);
+            buttons[0].setChecked(false);
+            buttons[2].setChecked(false);
             daysLayout.setVisibility(View.GONE);
             datePicker.setVisibility(View.GONE);
         }
-    }
-
-    void onEveryWeekClick(View v, Dialog dialog) {
-        CheckBox date = (CheckBox) dialog.findViewById(R.id.dateCheckBox);
-        Spinner datePicker = (Spinner) dialog.findViewById(R.id.spinnerStartDate);
-        CheckBox everyDay = (CheckBox) dialog.findViewById(R.id.everyDayCheckBox);
-        CheckBox everyWeek = (CheckBox) dialog.findViewById(R.id.everyWeekCheckBox);
-        LinearLayout daysLayout = (LinearLayout) dialog.findViewById(R.id.daysCheckboxes);
-
-        if(everyWeek.isChecked())
+        else if(clickedButton == 2)
         {
-            everyDay.setChecked(false);
-            date.setChecked(false);
+            buttons[0].setChecked(false);
+            buttons[1].setChecked(false);
             daysLayout.setVisibility(View.VISIBLE);
             datePicker.setVisibility(View.GONE);
         }
-        else
+        if(!buttons[clickedButton].isChecked())
+        {
+            datePicker.setVisibility(View.GONE);
             daysLayout.setVisibility(View.GONE);
+        }
     }
 
     void addNewReminder(View v)
     {
         // custom dialog
-        final Dialog dialog = new Dialog(getActivity());
+        final CustomDialog dialog = new CustomDialog(getContext());
         dialog.setContentView(R.layout.dialog_add_reminder);
         dialog.setTitle("Add new event");
 
         // set the custom dialog components - text, image and button
-        final Button startTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStartHour);
 
-        final Button confirmBtn = (Button)dialog.findViewById(R.id.confirmBtn);
+        final CheckBox buttons[] = new CheckBox[3];
 
-        dialog.findViewById(R.id.dateCheckBox).setOnClickListener(new View.OnClickListener(){
+        buttons[0] = dialog.findViewById(R.id.dateCheckBox);
+        buttons[1] = dialog.findViewById(R.id.dailyCheckBox);
+        buttons[2] = dialog.findViewById(R.id.weeklyCheckBox);
+
+        buttons[0].setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                onDateClick(view, dialog);
+                onButtonClick(view, dialog, buttons, 0);
             }
         });
-        dialog.findViewById(R.id.everyDayCheckBox).setOnClickListener(new View.OnClickListener(){
+        buttons[1].setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                onEveryDayClick(view, dialog);
+                onButtonClick(view, dialog, buttons, 1);
             }
         });
-        dialog.findViewById(R.id.everyWeekCheckBox).setOnClickListener(new View.OnClickListener(){
+        buttons[2].setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                onEveryWeekClick(view, dialog);
+                onButtonClick(view, dialog, buttons, 2);
+            }
+        });
+        dialog.findViewById(R.id.spinnerStartDate).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                CustomDialog.pickDate(view, getActivity());
             }
         });
 
-        startTimeSpinner.setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.spinnerStartHour).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-                pickTime(view);
+                CustomDialog.pickTime(view, getActivity());
             }
         });
 
-        confirmBtn.setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.confirmBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //add
-            }
-        });
-
-        dialog.show();
-    }
-
-    private void pickTime(final View v)
-    {
-        // custom dialog
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_time_picker);
-        dialog.setTitle("Pick a time");
-
-        final TimePicker tp = dialog.findViewById(R.id.timePicker);
-
-        Button confirmBtn = dialog.findViewById(R.id.confirmBtn);
-        confirmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Button)v).setText(tp.getCurrentHour() + ":" + tp.getCurrentMinute());
-                dialog.dismiss();
             }
         });
 

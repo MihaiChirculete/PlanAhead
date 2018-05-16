@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.alamkanak.weekview.MonthLoader;
 import com.alamkanak.weekview.WeekView;
 import com.alamkanak.weekview.WeekViewEvent;
+import com.plan.ahead.Classes.CustomDialog;
 import com.plan.ahead.Storage.StorageUtils;
 import com.plan.ahead.Utilities.DateStringUtils;
 import com.plan.ahead.Utilities.TimeStringUtils;
@@ -85,7 +86,7 @@ public class MyScheduleFragment extends Fragment {
         MonthLoader.MonthChangeListener mMonthChangeListener = new MonthLoader.MonthChangeListener() {
             @Override
             public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-                tb.setSubtitle(getResources().getString(R.string.year) + newYear + getResources().getString(R.string.month) + newMonth);
+                tb.setSubtitle(getResources().getString(R.string.year) + newYear + " " + getResources().getString(R.string.month) + (newMonth - 1));
 
                 // Populate the week view with some events.
                 return StorageUtils.loadEvents(getActivity().getApplicationContext());
@@ -109,7 +110,7 @@ public class MyScheduleFragment extends Fragment {
     void addNewEvent(View v)
     {
         // custom dialog
-        final Dialog dialog = new Dialog(getActivity());
+        final CustomDialog dialog = new CustomDialog(getContext());
         dialog.setContentView(R.layout.dialog_add_event);
         dialog.setTitle("Add new event");
 
@@ -128,7 +129,7 @@ public class MyScheduleFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                pickTime(view);
+                CustomDialog.pickTime(view, getActivity());
             }
         });
 
@@ -136,7 +137,7 @@ public class MyScheduleFragment extends Fragment {
 
             @Override
             public void onClick(View view) {
-                pickTime(view);
+                CustomDialog.pickTime(view, getActivity());
             }
         });
 
@@ -144,7 +145,7 @@ public class MyScheduleFragment extends Fragment {
             @Override
             public void onClick(View view)
             {
-                pickDate(view);
+                CustomDialog.pickDate(view, getActivity());
             }
         });
 
@@ -152,7 +153,7 @@ public class MyScheduleFragment extends Fragment {
             @Override
             public void onClick(View view)
             {
-                pickDate(view);
+                CustomDialog.pickDate(view, getActivity());
             }
         });
 
@@ -211,46 +212,5 @@ public class MyScheduleFragment extends Fragment {
         super.onDestroy();
 
         StorageUtils.saveEvents(events);
-    }
-
-    private void pickTime(final View v)
-    {
-        // custom dialog
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_time_picker);
-        dialog.setTitle("Pick a time");
-
-        final TimePicker tp = dialog.findViewById(R.id.timePicker);
-
-        Button confirmBtn = dialog.findViewById(R.id.confirmBtn);
-        confirmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Button)v).setText(tp.getCurrentHour() + ":" + tp.getCurrentMinute());
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
-    private void pickDate(final View v)
-    {
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_date_picker);
-        dialog.setTitle("Pick a date");
-
-        final DatePicker dp = dialog.findViewById(R.id.datePicker);
-
-        Button confirmBtn = dialog.findViewById(R.id.confirmBtn);
-        confirmBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((Button)v).setText(dp.getDayOfMonth() + "/" + dp.getMonth() + "/" + dp.getYear());
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
     }
 }
