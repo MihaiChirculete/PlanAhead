@@ -35,6 +35,7 @@ import com.plan.ahead.Utilities.TimeStringUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by mihai on 27.02.2018.
@@ -58,7 +59,7 @@ public class MyScheduleFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        events = StorageUtils.loadEvents();
+        events = StorageUtils.loadEvents(getActivity().getApplicationContext());
 
         tb = (Toolbar)getActivity().findViewById(R.id.toolbar);
         fabAddEvent = (FloatingActionButton)getActivity().findViewById(R.id.fabAddEvent);
@@ -87,7 +88,7 @@ public class MyScheduleFragment extends Fragment {
                 tb.setSubtitle(getResources().getString(R.string.year) + newYear + getResources().getString(R.string.month) + newMonth);
 
                 // Populate the week view with some events.
-                return StorageUtils.loadEvents();
+                return StorageUtils.loadEvents(getActivity().getApplicationContext());
             }
         };
 
@@ -172,7 +173,7 @@ public class MyScheduleFragment extends Fragment {
                         valid = false;
                         Toast.makeText(getActivity().getApplicationContext(), "End time must be greater than start time", Toast.LENGTH_LONG).show();
                     }
-                    if(DateStringUtils.dateCompare(d, d2) != 1) {
+                    if(DateStringUtils.dateCompare(d, d2) == -1) {
                         valid = false;
                         Toast.makeText(getActivity().getApplicationContext(), "End date must be greater than start date", Toast.LENGTH_LONG).show();
                     }
@@ -181,8 +182,21 @@ public class MyScheduleFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), "You must enter an event name", Toast.LENGTH_LONG).show();
                     }
 
-                    //if(valid)
-                      // add the event to the table view
+                    if(valid)
+                    {
+                        Calendar startTime = Calendar.getInstance();
+                        String startDateS = startDateSpinner.getText().toString();
+                        String startTimeS = startTimeSpinner.getText().toString();
+                        startTime.set(DateStringUtils.getYear(startDateS), DateStringUtils.getMonth(startDateS), DateStringUtils.getDay(startDateS), TimeStringUtils.getHour(startTimeS), TimeStringUtils.getMinutes(startTimeS));
+
+                        Calendar endTime = Calendar.getInstance();
+                        String stopDateS = startDateSpinner.getText().toString();
+                        String stopTimeS = startTimeSpinner.getText().toString();
+                        startTime.set(DateStringUtils.getYear(stopDateS), DateStringUtils.getMonth(stopDateS), DateStringUtils.getDay(stopDateS), TimeStringUtils.getHour(stopTimeS), TimeStringUtils.getMinutes(stopTimeS));
+
+                        WeekViewEvent event = new WeekViewEvent(2, eventNameBox.getText().toString(), startTime, endTime);
+                        StorageUtils.addEventAndSave(event, getActivity().getApplicationContext());
+                    }
                 }
                 else
                     Toast.makeText(getActivity().getApplicationContext(), "Interval not set!", Toast.LENGTH_LONG).show();

@@ -1,5 +1,6 @@
 package com.plan.ahead.Storage;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.widget.Toast;
 
@@ -60,9 +61,9 @@ public class StorageUtils {
                 jo = new JSONObject();
                 jo.put("id", event.getId());
                 jo.put("eventName", event.getName());
-                jo.put("startTime", event.getStartTime().getTimeInMillis());
-                jo.put("endTime", event.getEndTime().getTimeInMillis());
-                jo.put("location", event.getLocation());
+                jo.put("startTime", event.getStartTime().get(Calendar.MILLISECOND));
+                jo.put("endTime", event.getEndTime().get(Calendar.MILLISECOND));
+                //jo.put("location", event.getLocation());
                 jo.put("color", event.getColor());
 
                 ja.put(jo);
@@ -82,7 +83,7 @@ public class StorageUtils {
     }
 
     // load a list of Events from a json
-    public static List<WeekViewEvent> loadEvents()
+    public static List<WeekViewEvent> loadEvents(Context ctx)
     {
         File f = new File(getAppStoragePath() + "Events.json");
 
@@ -112,6 +113,8 @@ public class StorageUtils {
                 WeekViewEvent event = new WeekViewEvent(jo.getInt("id"), jo.getString("eventName"), startTime, endTime);
                 event.setColor(Color.GREEN);
                 events.add(event);
+
+                //Toast.makeText(ctx, "Year:" + startTime.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
             }
 
         } catch (FileNotFoundException e) {
@@ -123,5 +126,12 @@ public class StorageUtils {
         }
 
         return events;
+    }
+
+    public static void addEventAndSave(WeekViewEvent ev, Context ctx)
+    {
+        List<WeekViewEvent> events = loadEvents(ctx);
+        events.add(ev);
+        saveEvents(events);
     }
 }
