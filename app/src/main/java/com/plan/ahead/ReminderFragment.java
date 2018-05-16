@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -46,6 +49,60 @@ public class ReminderFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    void onDateClick(View v, Dialog dialog) {
+
+        CheckBox date = (CheckBox) dialog.findViewById(R.id.dateCheckBox);
+        Spinner datePicker = (Spinner) dialog.findViewById(R.id.spinnerStartDate);
+        CheckBox everyDay = (CheckBox) dialog.findViewById(R.id.everyDayCheckBox);
+        CheckBox everyWeek = (CheckBox) dialog.findViewById(R.id.everyWeekCheckBox);
+        LinearLayout daysLayout = (LinearLayout) dialog.findViewById(R.id.daysCheckboxes);
+
+        if(date.isChecked())
+        {
+            everyDay.setChecked(false);
+            everyWeek.setChecked(false);
+            daysLayout.setVisibility(View.GONE);
+            datePicker.setVisibility(View.VISIBLE);
+        }
+        else
+            datePicker.setVisibility(View.VISIBLE);
+
+    }
+    void onEveryDayClick(View v, Dialog dialog) {
+
+        CheckBox date = (CheckBox) dialog.findViewById(R.id.dateCheckBox);
+        Spinner datePicker = (Spinner) dialog.findViewById(R.id.spinnerStartDate);
+        CheckBox everyDay = (CheckBox) dialog.findViewById(R.id.everyDayCheckBox);
+        CheckBox everyWeek = (CheckBox) dialog.findViewById(R.id.everyWeekCheckBox);
+        LinearLayout daysLayout = (LinearLayout) dialog.findViewById(R.id.daysCheckboxes);
+
+        if(everyDay.isChecked())
+        {
+            date.setChecked(false);
+            everyWeek.setChecked(false);
+            daysLayout.setVisibility(View.GONE);
+            datePicker.setVisibility(View.GONE);
+        }
+    }
+
+    void onEveryWeekClick(View v, Dialog dialog) {
+        CheckBox date = (CheckBox) dialog.findViewById(R.id.dateCheckBox);
+        Spinner datePicker = (Spinner) dialog.findViewById(R.id.spinnerStartDate);
+        CheckBox everyDay = (CheckBox) dialog.findViewById(R.id.everyDayCheckBox);
+        CheckBox everyWeek = (CheckBox) dialog.findViewById(R.id.everyWeekCheckBox);
+        LinearLayout daysLayout = (LinearLayout) dialog.findViewById(R.id.daysCheckboxes);
+
+        if(everyWeek.isChecked())
+        {
+            everyDay.setChecked(false);
+            date.setChecked(false);
+            daysLayout.setVisibility(View.VISIBLE);
+            datePicker.setVisibility(View.GONE);
+        }
+        else
+            daysLayout.setVisibility(View.GONE);
+    }
+
     void addNewReminder(View v)
     {
         // custom dialog
@@ -57,6 +114,25 @@ public class ReminderFragment extends Fragment {
         final Button startTimeSpinner = (Button) dialog.findViewById(R.id.spinnerStartHour);
 
         final Button confirmBtn = (Button)dialog.findViewById(R.id.confirmBtn);
+
+        dialog.findViewById(R.id.dateCheckBox).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onDateClick(view, dialog);
+            }
+        });
+        dialog.findViewById(R.id.everyDayCheckBox).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onEveryDayClick(view, dialog);
+            }
+        });
+        dialog.findViewById(R.id.everyWeekCheckBox).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onEveryWeekClick(view, dialog);
+            }
+        });
 
         startTimeSpinner.setOnClickListener(new View.OnClickListener() {
 
