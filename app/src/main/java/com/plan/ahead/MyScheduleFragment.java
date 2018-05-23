@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -199,16 +200,22 @@ public class MyScheduleFragment extends Fragment {
                         startTime.set(DateStringUtils.getYear(startDateS), DateStringUtils.getMonth(startDateS), DateStringUtils.getDay(startDateS), TimeStringUtils.getHour(startTimeS), TimeStringUtils.getMinutes(startTimeS));
 
                         Calendar endTime = Calendar.getInstance();
-                        String stopDateS = startDateSpinner.getText().toString();
-                        String stopTimeS = startTimeSpinner.getText().toString();
-                        startTime.set(DateStringUtils.getYear(stopDateS), DateStringUtils.getMonth(stopDateS), DateStringUtils.getDay(stopDateS), TimeStringUtils.getHour(stopTimeS), TimeStringUtils.getMinutes(stopTimeS));
-                        Toast.makeText(getActivity().getApplicationContext(), String.valueOf(startTime.getTimeInMillis()), Toast.LENGTH_LONG).show();
+                        String stopDateS = stopDateSpinner.getText().toString();
+                        String stopTimeS = stopTimeSpinner.getText().toString();
+                        endTime.set(DateStringUtils.getYear(stopDateS), DateStringUtils.getMonth(stopDateS), DateStringUtils.getDay(stopDateS), TimeStringUtils.getHour(stopTimeS), TimeStringUtils.getMinutes(stopTimeS));
+
+                        //Toast.makeText(getActivity().getApplicationContext(), String.valueOf(startTime.getTimeInMillis()), Toast.LENGTH_LONG).show();
 
                         WeekViewEvent event = new WeekViewEvent(Scheduler.getAvailableId(), eventNameBox.getText().toString(), startTime, endTime);
                         StorageUtils.addEventAndSave(event);
                         dialog.cancel();
 
-                        mWeekView.getMonthChangeListener().onMonthChange(currentYear, currentMonth);
+                        // refresh the fragment
+                        Fragment frg = getActivity().getSupportFragmentManager().findFragmentById(R.id.main_fragment);
+                        final FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.detach(frg);
+                        ft.attach(frg);
+                        ft.commit();
                     }
                 }
                 else
