@@ -136,6 +136,12 @@ public class StorageUtils {
         return events;
     }
 
+    public static void deleteAllEvents()
+    {
+        File f = new File(getAppStoragePath() + "Events.json");
+        f.delete();
+    }
+
     public static void addEventAndSave(WeekViewEvent ev)
     {
         List<WeekViewEvent> events = loadEvents();
