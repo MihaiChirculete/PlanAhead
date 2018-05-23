@@ -229,7 +229,5 @@ public class MyScheduleFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        StorageUtils.saveEvents(events);
     }
 }
