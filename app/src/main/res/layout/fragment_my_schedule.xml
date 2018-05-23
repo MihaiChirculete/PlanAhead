@@ -33,7 +33,7 @@
         app:headerColumnTextColor="#8f000000"
         app:headerRowBackgroundColor="#ffefefef"
         app:headerRowPadding="12dp"
-        app:hourHeight="20dp"
+        app:hourHeight="100dp"
         app:noOfVisibleDays="3"
         app:textSize="12sp"
         app:todayBackgroundColor="#1848adff" />

@@ -31,6 +31,7 @@ import com.alamkanak.weekview.WeekViewEvent;
 import com.plan.ahead.Classes.CustomDialog;
 import com.plan.ahead.Storage.StorageUtils;
 import com.plan.ahead.Utilities.DateStringUtils;
+import com.plan.ahead.Utilities.Scheduler;
 import com.plan.ahead.Utilities.TimeStringUtils;
 
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class MyScheduleFragment extends Fragment {
     Toolbar tb;
     FloatingActionButton fabAddEvent;
     List<WeekViewEvent> events;
+    int currentYear, currentMonth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +62,11 @@ public class MyScheduleFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        events = StorageUtils.loadEvents(getActivity().getApplicationContext());
+        Calendar currentTime = Calendar.getInstance();
+        currentYear = currentTime.getTime().getYear();
+        currentMonth = currentTime.getTime().getMonth();
+
+        events = StorageUtils.loadEvents();
 
         tb = (Toolbar)getActivity().findViewById(R.id.toolbar);
         fabAddEvent = (FloatingActionButton)getActivity().findViewById(R.id.fabAddEvent);
@@ -87,9 +93,11 @@ public class MyScheduleFragment extends Fragment {
             @Override
             public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
                 tb.setSubtitle(getResources().getString(R.string.year) + newYear + " " + getResources().getString(R.string.month) + (newMonth - 1));
+                currentYear = newYear;
+                currentMonth = newMonth;
 
                 // Populate the week view with some events.
-                return StorageUtils.loadEvents(getActivity().getApplicationContext());
+                return StorageUtils.loadEvents();
             }
         };
 
@@ -194,9 +202,13 @@ public class MyScheduleFragment extends Fragment {
                         String stopDateS = startDateSpinner.getText().toString();
                         String stopTimeS = startTimeSpinner.getText().toString();
                         startTime.set(DateStringUtils.getYear(stopDateS), DateStringUtils.getMonth(stopDateS), DateStringUtils.getDay(stopDateS), TimeStringUtils.getHour(stopTimeS), TimeStringUtils.getMinutes(stopTimeS));
+                        Toast.makeText(getActivity().getApplicationContext(), String.valueOf(startTime.getTimeInMillis()), Toast.LENGTH_LONG).show();
 
-                        WeekViewEvent event = new WeekViewEvent(2, eventNameBox.getText().toString(), startTime, endTime);
-                        StorageUtils.addEventAndSave(event, getActivity().getApplicationContext());
+                        WeekViewEvent event = new WeekViewEvent(Scheduler.getAvailableId(), eventNameBox.getText().toString(), startTime, endTime);
+                        StorageUtils.addEventAndSave(event);
+                        dialog.cancel();
+
+                        mWeekView.getMonthChangeListener().onMonthChange(currentYear, currentMonth);
                     }
                 }
                 else

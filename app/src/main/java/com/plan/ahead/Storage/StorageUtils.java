@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by mihai on 27.02.2018.
@@ -61,8 +62,8 @@ public class StorageUtils {
                 jo = new JSONObject();
                 jo.put("id", event.getId());
                 jo.put("eventName", event.getName());
-                jo.put("startTime", event.getStartTime().get(Calendar.MILLISECOND));
-                jo.put("endTime", event.getEndTime().get(Calendar.MILLISECOND));
+                jo.put("startTime", event.getStartTime().getTimeInMillis());
+                jo.put("endTime", event.getEndTime().getTimeInMillis());
                 //jo.put("location", event.getLocation());
                 jo.put("color", event.getColor());
 
@@ -83,7 +84,7 @@ public class StorageUtils {
     }
 
     // load a list of Events from a json
-    public static List<WeekViewEvent> loadEvents(Context ctx)
+    public static List<WeekViewEvent> loadEvents()
     {
         File f = new File(getAppStoragePath() + "Events.json");
 
@@ -102,8 +103,7 @@ public class StorageUtils {
 
             ja = new JSONArray(new String(b));
 
-            for(int i=0; i<ja.length(); i++)
-            {
+            for(int i=0; i<ja.length(); i++) {
                 jo = ja.getJSONObject(i);
 
                 Calendar startTime = Calendar.getInstance();
@@ -111,10 +111,18 @@ public class StorageUtils {
                 Calendar endTime = Calendar.getInstance();
                 endTime.setTimeInMillis(jo.getLong("endTime"));
                 WeekViewEvent event = new WeekViewEvent(jo.getInt("id"), jo.getString("eventName"), startTime, endTime);
-                event.setColor(Color.GREEN);
-                events.add(event);
 
-                //Toast.makeText(ctx, "Year:" + startTime.get(Calendar.YEAR), Toast.LENGTH_LONG).show();
+                switch ((int)(Math.random() * 5))
+                {
+                    case 0: event.setColor(Color.GREEN);
+                    case 1: event.setColor(Color.BLUE);
+                    case 2: event.setColor(Color.RED);
+                    case 3: event.setColor(Color.CYAN);
+                    case 4: event.setColor(Color.YELLOW);
+                    default: event.setColor(Color.MAGENTA);
+                }
+
+                events.add(event);
             }
 
         } catch (FileNotFoundException e) {
@@ -128,9 +136,9 @@ public class StorageUtils {
         return events;
     }
 
-    public static void addEventAndSave(WeekViewEvent ev, Context ctx)
+    public static void addEventAndSave(WeekViewEvent ev)
     {
-        List<WeekViewEvent> events = loadEvents(ctx);
+        List<WeekViewEvent> events = loadEvents();
         events.add(ev);
         saveEvents(events);
     }
