@@ -12,11 +12,20 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
+import com.alamkanak.weekview.WeekViewEvent;
 import com.plan.ahead.Classes.CustomDialog;
+import com.plan.ahead.Storage.StorageUtils;
+import com.plan.ahead.Utilities.DateStringUtils;
+import com.plan.ahead.Utilities.TimeStringUtils;
+
+import java.util.Calendar;
 
 /**
  * Created by Madalina on 3/28/2018.
@@ -68,9 +77,9 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
         if(clickedButton == 0)
         {
             if(checks[0].isChecked()) {
-                dailyLayout.setVisibility(View.VISIBLE);
-                checks[1].setChecked(false);
-                weeklyLayout.setVisibility(View.GONE);
+                    dailyLayout.setVisibility(View.VISIBLE);
+                    checks[1].setChecked(false);
+                    weeklyLayout.setVisibility(View.GONE);
             }
             else
                 dailyLayout.setVisibility((View.GONE));
@@ -87,18 +96,26 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
         }
         else if(clickedButton < 9) {
             if(checks[clickedButton].isChecked()) {
-                daysLayouts[clickedButton - 2].setVisibility(View.VISIBLE);
-                checks[9].setChecked(false);
-                daysLayouts[7].setVisibility(View.GONE);
+                if(!checks[9].isChecked())
+                    daysLayouts[clickedButton - 2].setVisibility(View.VISIBLE);
+
             }
             else
                 daysLayouts[clickedButton - 2].setVisibility(View.GONE);
         }else {
-            for(int i = 2; i < 9; i++) {
-                checks[i].setChecked(false);
+            for(int i = 2; i < 9; i++)
                 daysLayouts[i - 2].setVisibility(View.GONE);
+
+            if(checks[9].isChecked())
+                daysLayouts[7].setVisibility(View.VISIBLE);
+            else {
+                for (int i = 2; i < 9; i++)
+                    if (checks[i].isChecked())
+                        daysLayouts[i - 2].setVisibility(View.VISIBLE);
+
+                daysLayouts[7].setVisibility(View.GONE);
             }
-            daysLayouts[7].setVisibility(View.VISIBLE);
+
         }
 
     }
@@ -173,9 +190,152 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
         dialog.findViewById(R.id.confirmBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //add
-            }
-        });
+                boolean valid = true;
+                EditText routineName = (EditText)dialog.findViewById(R.id.eventNameBox);
+
+                if(routineName.getText().toString().isEmpty()){
+                    valid = false;
+                    Toast.makeText(getActivity().getApplicationContext(), "Please enter a name", Toast.LENGTH_LONG).show();
+                }
+                else if (checks[0].isChecked()) {
+                    String startHour = timeSpinners[0].getText().toString();
+                    String endHour = timeSpinners[1].getText().toString();
+                    if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                        if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                            valid = false;
+                            Toast.makeText(getActivity().getApplicationContext(), "End time must be greater than start time", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        valid = false;
+                        Toast.makeText(getActivity().getApplicationContext(), "Please select the desired time interval", Toast.LENGTH_LONG).show();
+                    }
+                } else if (checks[1].isChecked()) {
+                    boolean checked = false;
+                    for(int i = 2; i < 9; i++){
+                        if(checks[i].isChecked()){
+                            checked = true;
+                            break;
+                        }
+                    }
+                    if(!checked){
+                        valid = false;
+                        Toast.makeText(getActivity().getApplicationContext(), "Please select a day", Toast.LENGTH_LONG).show();
+                        }
+                    else {
+                        if (checks[2].isChecked()) {
+                            String startHour = timeSpinners[2].getText().toString();
+                            String endHour = timeSpinners[3].getText().toString();
+                            if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                                if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                                    valid = false;
+                                    Toast.makeText(getActivity().getApplicationContext(), "Monday end time must be greater than start time", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                        if (checks[3].isChecked()) {
+                            String startHour = timeSpinners[4].getText().toString();
+                            String endHour = timeSpinners[5].getText().toString();
+                            if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                                if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                                    valid = false;
+                                    Toast.makeText(getActivity().getApplicationContext(), "Tuesday end time must be greater than start time", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                        if (checks[4].isChecked()) {
+                            String startHour = timeSpinners[6].getText().toString();
+                            String endHour = timeSpinners[7].getText().toString();
+                            if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                                if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                                    valid = false;
+                                    Toast.makeText(getActivity().getApplicationContext(), "Wednesday end time must be greater than start time", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                        if (checks[5].isChecked()) {
+                            String startHour = timeSpinners[8].getText().toString();
+                            String endHour = timeSpinners[9].getText().toString();
+                            if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                                if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                                    valid = false;
+                                    Toast.makeText(getActivity().getApplicationContext(), "Thursday end time must be greater than start time", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                        if (checks[6].isChecked()) {
+                            String startHour = timeSpinners[11].getText().toString();
+                            String endHour = timeSpinners[12].getText().toString();
+                            if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                                if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                                    valid = false;
+                                    Toast.makeText(getActivity().getApplicationContext(), "Friday end time must be greater than start time", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                        if (checks[7].isChecked()) {
+                            String startHour = timeSpinners[12].getText().toString();
+                            String endHour = timeSpinners[13].getText().toString();
+                            if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                                if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                                    valid = false;
+                                    Toast.makeText(getActivity().getApplicationContext(), "Saturday end time must be greater than start time", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                        if (checks[8].isChecked()) {
+                            String startHour = timeSpinners[14].getText().toString();
+                            String endHour = timeSpinners[15].getText().toString();
+                            if (!startHour.isEmpty() && !endHour.isEmpty()) {
+                                if (TimeStringUtils.timeCompare(startHour, endHour) != 1) {
+                                    valid = false;
+                                    Toast.makeText(getActivity().getApplicationContext(), "Sunday end time must be greater than start time", Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    valid = false;
+                    Toast.makeText(getActivity().getApplicationContext(), "Please check an option", Toast.LENGTH_LONG).show();
+                }
+                if(valid){
+                    Toast.makeText(getActivity().getApplicationContext(), "Valid", Toast.LENGTH_LONG).show();
+                }
+
+//                if(!t.isEmpty() && !t2.isEmpty())
+//                {
+//                    if(TimeStringUtils.timeCompare(t, t2) != 1) {
+//                        valid = false;
+//                        Toast.makeText(getActivity().getApplicationContext(), "End time must be greater than start time", Toast.LENGTH_LONG).show();
+//                    }
+//                    if(DateStringUtils.dateCompare(d, d2) == -1) {
+//                        valid = false;
+//                        Toast.makeText(getActivity().getApplicationContext(), "End date must be greater than start date", Toast.LENGTH_LONG).show();
+//                    }
+//                    if(eventNameBox.getText().toString().isEmpty()) {
+//                        valid = false;
+//                        Toast.makeText(getActivity().getApplicationContext(), "You must enter an event name", Toast.LENGTH_LONG).show();
+//                    }
+//
+//                    if(valid)
+//                    {
+//                        Calendar startTime = Calendar.getInstance();
+//                        String startDateS = startDateSpinner.getText().toString();
+//                        String startTimeS = startTimeSpinner.getText().toString();
+//                        startTime.set(DateStringUtils.getYear(startDateS), DateStringUtils.getMonth(startDateS), DateStringUtils.getDay(startDateS), TimeStringUtils.getHour(startTimeS), TimeStringUtils.getMinutes(startTimeS));
+//
+//                        Calendar endTime = Calendar.getInstance();
+//                        String stopDateS = startDateSpinner.getText().toString();
+//                        String stopTimeS = startTimeSpinner.getText().toString();
+//                        startTime.set(DateStringUtils.getYear(stopDateS), DateStringUtils.getMonth(stopDateS), DateStringUtils.getDay(stopDateS), TimeStringUtils.getHour(stopTimeS), TimeStringUtils.getMinutes(stopTimeS));
+//
+//                        WeekViewEvent event = new WeekViewEvent(2, eventNameBox.getText().toString(), startTime, endTime);
+//                        StorageUtils.addEventAndSave(event, getActivity().getApplicationContext());
+//                    }
+//                }
+//                else
+//                    Toast.makeText(getActivity().getApplicationContext(), "Interval not set!", Toast.LENGTH_LONG).show();
+//            }
+            }});
 
         checks[0].setOnClickListener(new View.OnClickListener(){
             @Override
