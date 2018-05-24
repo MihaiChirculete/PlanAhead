@@ -28,7 +28,8 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/routineTitle"
             android:text="Zilnic, ora_start - ora_final"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/routineFreqWeeklyST"
@@ -38,7 +39,8 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/routineFreqDaily"
             android:text="Saptamanal, same timetable"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/routineFreqWeeklyDH"
@@ -48,7 +50,8 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/routineFreqWeeklyST"
             android:text="Saptamanal, ore diferite"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
