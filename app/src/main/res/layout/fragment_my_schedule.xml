@@ -33,8 +33,8 @@
         app:headerColumnTextColor="#8f000000"
         app:headerRowBackgroundColor="#ffefefef"
         app:headerRowPadding="12dp"
-        app:hourHeight="100dp"
+        app:hourHeight="19.5dp"
         app:noOfVisibleDays="3"
-        app:textSize="12sp"
+        app:textSize="12dp"
         app:todayBackgroundColor="#1848adff" />
 </RelativeLayout>

@@ -35,6 +35,7 @@ import com.plan.ahead.Utilities.DateStringUtils;
 import com.plan.ahead.Utilities.Scheduler;
 import com.plan.ahead.Utilities.TimeStringUtils;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -179,7 +180,7 @@ public class MyScheduleFragment extends Fragment {
 
                 if(!t.isEmpty() && !t2.isEmpty())
                 {
-                    if(TimeStringUtils.timeCompare(t, t2) != 1) {
+                    if((TimeStringUtils.timeCompare(t, t2) != 1) && (d.equals(d2))) {
                         valid = false;
                         Toast.makeText(getActivity().getApplicationContext(), "End time must be greater than start time", Toast.LENGTH_LONG).show();
                     }

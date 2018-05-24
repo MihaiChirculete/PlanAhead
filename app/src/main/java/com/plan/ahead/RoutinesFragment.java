@@ -231,6 +231,10 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
                                     Toast.makeText(getActivity().getApplicationContext(), "Monday end time must be greater than start time", Toast.LENGTH_LONG).show();
                                 }
                             }
+                            else{
+                                valid = false;
+                                Toast.makeText(getActivity().getApplicationContext(), "Please set a time interval", Toast.LENGTH_LONG).show();
+                            }
                         }
                         if (checks[3].isChecked()) {
                             String startHour = timeSpinners[4].getText().toString();
@@ -240,6 +244,10 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
                                     valid = false;
                                     Toast.makeText(getActivity().getApplicationContext(), "Tuesday end time must be greater than start time", Toast.LENGTH_LONG).show();
                                 }
+                            }
+                            else{
+                                valid = false;
+                                Toast.makeText(getActivity().getApplicationContext(), "Please set a time interval", Toast.LENGTH_LONG).show();
                             }
                         }
                         if (checks[4].isChecked()) {
@@ -251,6 +259,10 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
                                     Toast.makeText(getActivity().getApplicationContext(), "Wednesday end time must be greater than start time", Toast.LENGTH_LONG).show();
                                 }
                             }
+                            else{
+                                valid = false;
+                                Toast.makeText(getActivity().getApplicationContext(), "Please set a time interval", Toast.LENGTH_LONG).show();
+                            }
                         }
                         if (checks[5].isChecked()) {
                             String startHour = timeSpinners[8].getText().toString();
@@ -260,6 +272,10 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
                                     valid = false;
                                     Toast.makeText(getActivity().getApplicationContext(), "Thursday end time must be greater than start time", Toast.LENGTH_LONG).show();
                                 }
+                            }
+                            else{
+                                valid = false;
+                                Toast.makeText(getActivity().getApplicationContext(), "Please set a time interval", Toast.LENGTH_LONG).show();
                             }
                         }
                         if (checks[6].isChecked()) {
@@ -271,6 +287,10 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
                                     Toast.makeText(getActivity().getApplicationContext(), "Friday end time must be greater than start time", Toast.LENGTH_LONG).show();
                                 }
                             }
+                            else{
+                                valid = false;
+                                Toast.makeText(getActivity().getApplicationContext(), "Please set a time interval", Toast.LENGTH_LONG).show();
+                            }
                         }
                         if (checks[7].isChecked()) {
                             String startHour = timeSpinners[12].getText().toString();
@@ -281,6 +301,10 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
                                     Toast.makeText(getActivity().getApplicationContext(), "Saturday end time must be greater than start time", Toast.LENGTH_LONG).show();
                                 }
                             }
+                            else{
+                                valid = false;
+                                Toast.makeText(getActivity().getApplicationContext(), "Please set a time interval", Toast.LENGTH_LONG).show();
+                            }
                         }
                         if (checks[8].isChecked()) {
                             String startHour = timeSpinners[14].getText().toString();
@@ -290,6 +314,10 @@ public class RoutinesFragment extends android.support.v4.app.Fragment {
                                     valid = false;
                                     Toast.makeText(getActivity().getApplicationContext(), "Sunday end time must be greater than start time", Toast.LENGTH_LONG).show();
                                 }
+                            }
+                            else{
+                                valid = false;
+                                Toast.makeText(getActivity().getApplicationContext(), "Please set a time interval", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
