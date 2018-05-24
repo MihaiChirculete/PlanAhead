@@ -20,7 +20,7 @@
     <string name="action_cancel">Cancel</string>
     <string name="nav_group_other">Other</string>
     <string name="dialog_title_about">About</string>
-    <string name="dialog_message_about">This is an app that helps you better organize your schedule.</string>
+    <string name="dialog_message_about">This is an app that helps you organize your schedule more efficiently.</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
     <string name="wednesday">Wednesday</string>

@@ -14,30 +14,46 @@
 
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/routineTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Titlu"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/routineFreqDaily"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/title"
-            android:text="Descriere" />
+            android:layout_below="@+id/routineTitle"
+            android:text="Zilnic, ora_start - ora_final"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/routineFreqWeeklyST"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/description"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:text="14:00"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/routineFreqDaily"
+            android:text="Saptamanal, same timetable"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+        <TextView
+            android:id="@+id/routineFreqWeeklyDH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/routineFreqWeeklyST"
+            android:text="Saptamanal, ore diferite"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
 
     </RelativeLayout>
+
 </ScrollView>
+
+
+
+

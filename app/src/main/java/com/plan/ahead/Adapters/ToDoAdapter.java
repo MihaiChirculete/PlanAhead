@@ -23,11 +23,14 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView title;
+        public TextView title, description, time;
 
         public ViewHolder(View v) {
             super(v);
             title = (TextView)v.findViewById(R.id.title);
+            description = (TextView)v.findViewById(R.id.description);
+            time = (TextView)v.findViewById(R.id.time);
+
         }
     }
 
@@ -36,7 +39,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         mDataset = myDataset;
     }
 
-    // Create new views (invoked by the layout manager)
+    // Create new views (invoked by the routine_item manager)
     @Override
     public ToDoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
@@ -47,16 +50,19 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+    // Replace the contents of a view (invoked by the routine_item manager)
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
+
         holder.title.setText(mDataset.get(position).getEntryTitle());
+        holder.description.setText(mDataset.get(position).getEntryDescription());
+        holder.time.setText(mDataset.get(position).getEntryTimeInterval());
 
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
+    // Return the size of your dataset (invoked by the routine_item manager)
     @Override
     public int getItemCount() {
         return mDataset.size();

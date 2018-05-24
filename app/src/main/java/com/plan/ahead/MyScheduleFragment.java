@@ -55,7 +55,7 @@ public class MyScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the routine_item for this fragment
         return inflater.inflate(R.layout.fragment_my_schedule, container, false);
     }
 
@@ -79,7 +79,7 @@ public class MyScheduleFragment extends Fragment {
             }
         });
 
-        // Get a reference for the week view in the layout.
+        // Get a reference for the week view in the routine_item.
         mWeekView = (WeekView) getActivity().findViewById(R.id.weekView);
 
         // Set an action when any event is clicked.
