@@ -51,7 +51,6 @@ public class MyScheduleFragment extends Fragment {
     Toolbar tb;
     FloatingActionButton fabAddEvent;
     List<WeekViewEvent> events;
-    int currentYear, currentMonth;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,10 +62,6 @@ public class MyScheduleFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        Calendar currentTime = Calendar.getInstance();
-        currentYear = currentTime.getTime().getYear();
-        currentMonth = currentTime.getTime().getMonth();
 
         events = StorageUtils.loadEvents();
 
@@ -94,12 +89,10 @@ public class MyScheduleFragment extends Fragment {
         MonthLoader.MonthChangeListener mMonthChangeListener = new MonthLoader.MonthChangeListener() {
             @Override
             public List<WeekViewEvent> onMonthChange(int newYear, int newMonth) {
-                tb.setSubtitle(getResources().getString(R.string.year) + newYear + " " + getResources().getString(R.string.month) + (newMonth - 1));
-                currentYear = newYear;
-                currentMonth = newMonth;
+                tb.setSubtitle(getResources().getString(R.string.year) + newYear);
 
                 // Populate the week view with some events.
-                return StorageUtils.loadEvents();
+                return events;
             }
         };
 

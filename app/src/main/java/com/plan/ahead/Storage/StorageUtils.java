@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.widget.Toast;
 
 import com.alamkanak.weekview.WeekViewEvent;
+import com.plan.ahead.Data.ToDoEntry;
 import com.plan.ahead.R;
 
 import org.json.JSONArray;
@@ -136,6 +137,84 @@ public class StorageUtils {
         }
 
         return events;
+    }
+
+    // save a list of ToDoEntry as json
+    public static void saveToDoEntries(List<ToDoEntry> entries)
+    {
+        File f = new File(getAppStoragePath() + "ToDoEntries.json");
+        JSONArray ja = new JSONArray();
+        JSONObject jo;
+
+        try {
+            // create the file if it doesn't exist
+            if(!f.exists())
+                f.createNewFile();
+
+            for(int i=0; i<entries.size(); i++)
+            {
+                ToDoEntry entry = entries.get(i);
+
+                jo = new JSONObject();
+                jo.put("title", entry.getEntryTitle());
+                jo.put("description", entry.getEntryDescription());
+                jo.put("timeInterval", entry.getEntryTimeInterval());
+
+                ja.put(jo);
+            }
+
+            // the json array is ready
+            // write it to the file
+            FileOutputStream stream = new FileOutputStream(f);
+            stream.write(ja.toString().getBytes());
+            stream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<ToDoEntry> loadToDoEntries()
+    {
+        File f = new File(getAppStoragePath() + "ToDoEntries.json");
+
+        if(!f.exists())
+            return new ArrayList<ToDoEntry>();
+
+        List<ToDoEntry> entries = new ArrayList<ToDoEntry>();
+        JSONArray ja;
+        JSONObject jo;
+
+        try {
+            FileInputStream in = new FileInputStream(f);
+            byte[] b = new byte[(int) f.length()];
+            in.read(b);
+            in.close();
+
+            ja = new JSONArray(new String(b));
+
+            for(int i=0; i<ja.length(); i++) {
+                jo = ja.getJSONObject(i);
+
+                ToDoEntry entry = new ToDoEntry();
+                entry.setEntryTitle(jo.getString("title"));
+                entry.setEntryDescription(jo.getString("description"));
+                entry.setEntryTimeInterval(jo.getString("timeInterval"));
+
+                entries.add(entry);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return entries;
     }
 
     public static void deleteAllEvents()
