@@ -219,12 +219,12 @@ public class StorageUtils {
         return entries;
     }
 
-    // save a list of memento entries
-    public static void saveMementoEntries(List<Object> entries, Context ctx)
+    // generic method for serializing a list of objects to a file
+    private static void serializeObjectList(List<Object> entries, Context ctx, String fileName)
     {
         try {
             int objectCount = entries.size();
-            FileOutputStream fos = ctx.openFileOutput(getAppStoragePath() + "MementoEntries.dat", Context.MODE_PRIVATE);
+            FileOutputStream fos = ctx.openFileOutput(getAppStoragePath() + fileName, Context.MODE_PRIVATE);
             ObjectOutputStream os = new ObjectOutputStream(fos);
             // put the size at the beggining of the file
             os.writeObject(objectCount);
@@ -237,13 +237,14 @@ public class StorageUtils {
         }
     }
 
-    public static List<Object> loadMementoEntries(Context ctx)
+    // generic method for deserializing a list of objects from a file
+    private static List<Object> deserializeObjectList(Context ctx, String fileName)
     {
         try {
             int objectCount;
             List<Object> entries = new ArrayList<Object>();
 
-            FileInputStream fis = ctx.openFileInput(getAppStoragePath() + "MementoEntries.dat");
+            FileInputStream fis = ctx.openFileInput(getAppStoragePath() + fileName);
             ObjectInputStream is = new ObjectInputStream(fis);
 
             // read the size of the array
@@ -263,8 +264,18 @@ public class StorageUtils {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
         return null;
+    }
+
+    // save a list of memento entries
+    public static void saveMementoEntries(List<Object> entries, Context ctx)
+    {
+        serializeObjectList(entries, ctx, "MementoEntries.dat");
+    }
+
+    public static List<Object> loadMementoEntries(Context ctx)
+    {
+        return deserializeObjectList(ctx, "MementoEntries.dat");
     }
 
     public static void deleteAllEvents()
