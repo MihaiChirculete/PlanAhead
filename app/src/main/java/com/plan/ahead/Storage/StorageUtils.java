@@ -278,6 +278,17 @@ public class StorageUtils {
         return deserializeObjectList(ctx, "MementoEntries.dat");
     }
 
+    // save a list of routine entries
+    public static void saveRoutineEntries(List<Object> entries, Context ctx)
+    {
+        serializeObjectList(entries, ctx, "RoutineEntries.dat");
+    }
+
+    public static List<Object> loadRoutineEntries(Context ctx)
+    {
+        return deserializeObjectList(ctx, "RoutineEntries.dat");
+    }
+
     public static void deleteAllEvents()
     {
         File f = new File(getAppStoragePath() + "Events.json");
