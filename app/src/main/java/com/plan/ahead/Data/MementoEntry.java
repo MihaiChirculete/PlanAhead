@@ -1,10 +1,12 @@
 package com.plan.ahead.Data;
 
+import java.io.Serializable;
+
 /**
  * Created by Madalina on 5/24/2018.
  */
 
-public class MementoEntry {
+public class MementoEntry implements Serializable{
 
     protected String memName;
     protected String memRemindHour;

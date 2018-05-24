@@ -18,6 +18,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -215,6 +217,54 @@ public class StorageUtils {
         }
 
         return entries;
+    }
+
+    // save a list of memento entries
+    public static void saveMementoEntries(List<Object> entries, Context ctx)
+    {
+        try {
+            int objectCount = entries.size();
+            FileOutputStream fos = ctx.openFileOutput(getAppStoragePath() + "MementoEntries.dat", Context.MODE_PRIVATE);
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            // put the size at the beggining of the file
+            os.writeObject(objectCount);
+            for(int i=0; i<entries.size(); i++)
+                os.writeObject(entries.get(i));
+            os.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<Object> loadMementoEntries(Context ctx)
+    {
+        try {
+            int objectCount;
+            List<Object> entries = new ArrayList<Object>();
+
+            FileInputStream fis = ctx.openFileInput(getAppStoragePath() + "MementoEntries.dat");
+            ObjectInputStream is = new ObjectInputStream(fis);
+
+            // read the size of the array
+            objectCount = (int)is.readObject();
+
+            for(int i=0; i<objectCount; i++)
+                entries.add(is.readObject());
+
+            is.close();
+            fis.close();
+
+            return entries;
+        }
+        catch (IOException e)
+        {
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public static void deleteAllEvents()
