@@ -201,7 +201,7 @@ public class MyScheduleFragment extends Fragment {
                         //Toast.makeText(getActivity().getApplicationContext(), String.valueOf(startTime.getTimeInMillis()), Toast.LENGTH_LONG).show();
 
                         WeekViewEvent event = new WeekViewEvent(Scheduler.getAvailableId(), eventNameBox.getText().toString(), startTime, endTime);
-                        StorageUtils.addEventAndSave(event);
+                        Scheduler.scheduleNewEvent(event, getActivity().getApplicationContext());
                         dialog.cancel();
 
                         // refresh the fragment
